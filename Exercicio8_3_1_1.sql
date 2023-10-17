@@ -1,3 +1,4 @@
+-- Insere dados na tabela alunos
 CALL novoAluno("João da Silva");
 CALL novoAluno("Maria Pereira Almeida");
 CALL novoAluno("Pedro Silva");
@@ -15,4 +16,5 @@ CALL novoAluno("Guilherme da Silva");
 CALL novoAluno("Alice Rodrigues");
 CALL novoAluno("Ana Ribeiro de Martins Pereira");
 
+-- Exibe os dados da tabela alunos
 CALL selecionarTudo("alunos")

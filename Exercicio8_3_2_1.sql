@@ -1,3 +1,4 @@
+-- Insere dados na tabela cursos
 CALL novoCurso('Engenharia Mecânica');
 CALL novoCurso('Medicina');
 CALL novoCurso('Ciência da Computação');
@@ -9,4 +10,5 @@ CALL novoCurso('Engenharia Civil');
 CALL novoCurso('Ciências Biológicas');
 CALL novoCurso('Economia');
 
+-- Exibe os dados da tabela cursos
 CALL selecionarTudo("cursos");

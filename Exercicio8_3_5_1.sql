@@ -1,24 +1,30 @@
--- Combinando IDs de Cursos e Professores
-CALL novoCursoParaOProfessor(2, 3);
-CALL novoCursoParaOProfessor(2, 9);
-CALL novoCursoParaOProfessor(2, 4);
-CALL novoCursoParaOProfessor(2, 6);
-CALL novoCursoParaOProfessor(3, 3);
-CALL novoCursoParaOProfessor(3, 10);
-CALL novoCursoParaOProfessor(3, 7);
-CALL novoCursoParaOProfessor(4, 4);
-CALL novoCursoParaOProfessor(4, 11);
-CALL novoCursoParaOProfessor(5, 5);
-CALL novoCursoParaOProfessor(5, 8);
-CALL novoCursoParaOProfessor(5, 12);
-CALL novoCursoParaOProfessor(6, 5);
-CALL novoCursoParaOProfessor(6, 13);
-CALL novoCursoParaOProfessor(7, 5);
-CALL novoCursoParaOProfessor(7, 7);
-CALL novoCursoParaOProfessor(7, 14);
-CALL novoCursoParaOProfessor(8, 6);
-CALL novoCursoParaOProfessor(9, 6);
-CALL novoCursoParaOProfessor(10, 7);
-CALL novoCursoParaOProfessor(11, 8);
-
-CALL selecionarTudo("professores_cursos");
+DELIMITER $
+	-- Cria a procedure novoAluno, para que seja adicionado um novo aluno à tabela alunos
+	CREATE PROCEDURE novoAluno(aln_nome VARCHAR(400))
+		BEGIN
+			-- Define os campos primeiroNome e ultimoSobrenome a partir do campo aln_nome passado como parâmetro da função
+			SET @primeiroNome = LOWER(SUBSTRING_INDEX(aln_nome, ' ', 1));
+            SET @ultimoSobrenome = LOWER(REVERSE(SUBSTRING_INDEX(REVERSE(aln_nome), ' ', 1)));
+             
+			-- Procura alunos na tabela alunos que possuam o mesmo primeiroNome e ultimoSobrenome do novo aluno
+            SELECT COUNT(*) 
+              INTO @emailCount 
+              FROM alunos
+			 WHERE @primeiroNome = aln_primeiro_nome 
+               AND @ultimoSobrenome = aln_ultimo_sobrenome;
+			
+			/* Cria o email do novo aluno baseado em seu primeiroNome e ultimoSobrenome, 
+            caso haja outros emails que têm como base esse mesmo primeiroNome e ultimoSobrenome, 
+            a quantidade de ocorrências é adicionada ao email do novoAluno, para que haja uma diferenciação*/
+            SET @aln_email = 
+				CASE
+					WHEN @emailCount > 0 
+                    THEN CONCAT(@primeiroNome, '.', @ultimoSobrenome, @emailCount, '@facens.com')
+					ELSE CONCAT(@primeiroNome, '.', @ultimoSobrenome, '@facens.com')
+				END;
+                
+			-- Insere os valores definidos na tabela alunos, (o id é NULL pois este campo é autoincremental)
+			INSERT INTO alunos
+			  	 VALUES (NULL, aln_nome, @aln_email, @primeiroNome , @ultimoSobrenome);
+		END $
+DELIMITER ;

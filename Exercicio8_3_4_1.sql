@@ -1,3 +1,4 @@
+-- Insere dados na tabela alunos_cursos
 CALL novoAlunoNoCurso(5, 2);
 CALL novoAlunoNoCurso(5, 4);
 CALL novoAlunoNoCurso(6, 3);
@@ -19,4 +20,5 @@ CALL novoAlunoNoCurso(18, 4);
 CALL novoAlunoNoCurso(19, 7);
 CALL novoAlunoNoCurso(20, 8);
 
+-- Exibe os dados da tabela alunos_cursos
 CALL selecionarTudo("alunos_cursos");
