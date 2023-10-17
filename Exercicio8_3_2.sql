@@ -1,0 +1,7 @@
+DELIMITER $
+	CREATE PROCEDURE novoCurso(cur_nome VARCHAR(100))
+		BEGIN
+			INSERT INTO cursos
+				VALUES (NULL, cur_nome);
+		END $
+DELIMITER ;
