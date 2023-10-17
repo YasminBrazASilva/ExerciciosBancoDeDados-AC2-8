@@ -1,5 +1,5 @@
 DELIMITER $
-	-- Cria a procedure novoAlunoNoCurso, para que seja registrado na tabela uma nova relação de aluno-curso
+	-- Cria a procedure novoAlunoNoCurso, para que seja registrado na tabela alunos_cursos uma nova relação de aluno-curso
 	CREATE PROCEDURE novoAlunoNoCurso(aln_id INT, cur_id INT)
 		BEGIN
 			-- Insere os valores definidos na tabela alunos_cursos
